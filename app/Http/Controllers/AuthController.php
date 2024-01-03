@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Helpers\ApiResponseHelper;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
 
 class AuthController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * Get a JWT via given credentials.
      *
@@ -17,7 +24,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = $this->userRepository->login($credentials)) {
             return ApiResponseHelper::error(401, 'Gagal Login!', 'Unauthorize');
         }
 
@@ -32,7 +39,7 @@ class AuthController extends Controller
     public function me()
     {
         if (auth()->check()) {
-            return ApiResponseHelper::success(200, 'Berhasil mendapatkan data pengguna!', auth()->user());
+            return ApiResponseHelper::success(200, 'Berhasil mendapatkan data pengguna!', $this->userRepository->me());
         }
         return ApiResponseHelper::error(401, 'Gagal mendapatkan data pengguna!', 'Unauthorize');
     }
@@ -44,7 +51,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        $this->userRepository->logout();
 
         return ApiResponseHelper::success(200, 'Berhasil Logout', null);
     }
