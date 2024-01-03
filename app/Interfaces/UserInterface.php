@@ -6,4 +6,5 @@ interface UserInterface {
     public function login($credentials);
     public function me();
     public function logout();
+    public function getId();
 }

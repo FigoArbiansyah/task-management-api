@@ -16,4 +16,8 @@ class UserRepository implements UserInterface {
     public function logout() {
         return auth()->logout();
     }
+
+    public function getId() {
+        return auth()->user()->id;
+    }
 }
