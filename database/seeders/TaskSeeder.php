@@ -16,12 +16,14 @@ class TaskSeeder extends Seeder
         Task::create([
             'title' => 'Fixing Fitur A',
             'description' => 'Memperbaiki fitur a',
-            'status' => 'done'
+            'status' => 'done',
+            'user_id' => 1,
         ]);
         Task::create([
             'title' => 'Fixing Fitur B',
             'description' => 'Memperbaiki fitur b',
-            'status' => 'undone'
+            'status' => 'undone',
+            'user_id' => 1,
         ]);
     }
 }
