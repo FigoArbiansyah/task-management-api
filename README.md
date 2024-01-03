@@ -24,6 +24,9 @@ cp .env.example .env
 # Generate application key
 php artisan key:generate
 
+# Generate jwt secret key
+php artisan jwt:secret
+
 # Run database migrations
 php artisan migrate
 
