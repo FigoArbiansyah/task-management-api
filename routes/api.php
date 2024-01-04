@@ -19,3 +19,10 @@ Route::prefix('v1')->group(function() {
         Route::delete('/{id}', [TaskController::class, 'delete'])->name('delete.tasks');
     });
 });
+
+Route::any('{any}', function () {
+    return response()->json([
+        'message' => 'Route not found bro',
+        'owner' => 'https://www.github.com/FigoArbiansyah',
+    ], 404);
+})->where('any', '.*');
