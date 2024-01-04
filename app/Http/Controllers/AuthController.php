@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ApiResponseHelper;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AuthRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 
@@ -13,6 +13,20 @@ class AuthController extends Controller
 
     public function __construct(UserRepository $userRepository) {
         $this->userRepository = $userRepository;
+    }
+
+    public function register(AuthRequest $request) {
+        try {
+            $validated = $request->validated();
+            $this->userRepository->register($validated);
+            return ApiResponseHelper::success(201, "Berhasil registrasi!", $validated);
+
+        } catch (\Exception $e) {
+            if ($e->getCode() === 422) {
+                return $e;
+            }
+            return ApiResponseHelper::error(500, "Gagal registrasi.", $e->getMessage());
+        }
     }
 
     /**
