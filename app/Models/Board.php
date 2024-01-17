@@ -12,4 +12,8 @@ class Board extends Model
     protected $fillable = [
         "title"
     ];
+
+    public function Tasks() {
+        return $this->hasMany(Task::class);
+    }
 }

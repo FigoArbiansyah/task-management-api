@@ -25,7 +25,9 @@ class TaskRequest extends FormRequest
         return [
             "title" => 'required|string|min:2|max:35',
             "description" => 'required|string|min:2|max:500',
-            "status" => 'required|string',
+            "level" => 'required|string',
+            "thumbnail" => 'required|string',
+            "board_id" => 'required'
         ];
     }
 
@@ -40,8 +42,11 @@ class TaskRequest extends FormRequest
             "description.string" => 'Deskripsi harus berupa teks.',
             "description.min" => 'Masukkan minimal 2 karakter.',
             "description.max" => 'Masukkan maksimal 35 karakter.',
-            "status.required" => 'Status harus diisi.',
-            "status.string" => 'Status harus berupa teks.',
+            "level.required" => 'Level harus diisi.',
+            "level.string" => 'Level harus berupa teks.',
+            "thumbnail.required" => 'Thumbnail harus diisi.',
+            "thumbnail.string" => 'Thumbnail harus berupa teks.',
+            "board_id.required" => 'Board Id harus diisi.',
         ];
     }
 

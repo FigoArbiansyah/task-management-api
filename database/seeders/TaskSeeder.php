@@ -16,14 +16,18 @@ class TaskSeeder extends Seeder
         Task::create([
             'title' => 'Fixing Fitur A',
             'description' => 'Memperbaiki fitur a',
-            'status' => 'done',
+            'level' => 'low',
             'user_id' => 1,
+            'board_id' => 1,
+            'thumbnail' => 'https://www.dicoding.com/blog/wp-content/uploads/2023/06/complex-flowchart-complex.drawio-1024x936.png'
         ]);
         Task::create([
             'title' => 'Fixing Fitur B',
             'description' => 'Memperbaiki fitur b',
-            'status' => 'undone',
+            'level' => 'medium',
             'user_id' => 1,
+            'board_id' => 2,
+            'thumbnail' => 'https://www.dicoding.com/blog/wp-content/uploads/2023/06/complex-flowchart-complex.drawio-1024x936.png'
         ]);
     }
 }

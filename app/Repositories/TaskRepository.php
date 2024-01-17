@@ -13,16 +13,18 @@ class TaskRepository implements TaskInterface {
     }
 
     public function getTasks() {
-        return Task::where('user_id', $this->userRepository->getId())->get();
+        return Task::with('board')->where('user_id', $this->userRepository->getId())->get();
     }
     public function getTaskDetail($id) {
-        return Task::where('id', $id)->where('user_id', $this->userRepository->getId())->firstOrFail();
+        return Task::with('board')->where('id', $id)->where('user_id', $this->userRepository->getId())->firstOrFail();
     }
     public function createTask(array $data) {
         $requestData = [
             "title" => $data['title'],
             "description" => $data['description'],
-            "status" => $data['status'],
+            "level" => $data['level'],
+            "board_id" => $data['board_id'],
+            "thumbnail" => $data['thumbnail'],
             "user_id" => $this->userRepository->getId(),
         ];
         return Task::create($requestData);
@@ -39,4 +41,3 @@ class TaskRepository implements TaskInterface {
     }
 }
 
-?>
