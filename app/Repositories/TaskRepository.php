@@ -13,7 +13,7 @@ class TaskRepository implements TaskInterface {
     }
 
     public function getTasks() {
-        return Task::with('board')->where('user_id', $this->userRepository->getId())->get();
+        return Task::with('board')->where('user_id', $this->userRepository->getId())->orderBy('updated_at', 'desc')->get();
     }
     public function getTaskDetail($id) {
         return Task::with('board')->where('id', $id)->where('user_id', $this->userRepository->getId())->firstOrFail();
