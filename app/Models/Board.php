@@ -13,7 +13,7 @@ class Board extends Model
         "title"
     ];
 
-    public function Tasks() {
+    public function tasks() {
         return $this->hasMany(Task::class);
     }
 }
